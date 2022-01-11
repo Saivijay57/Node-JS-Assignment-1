@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>First Ejs app</title>
+    <style>
+        .selected{
+            color: green;
+        }
+        .notselected{
+            color: red;
+        }
+        table,th,td{
+            width: 50%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table width> 
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Select</th>
+                <th>Reject</th>
+                <th>Delete</th>
+            </tr>
+            <% users.forEach(user=>{%>
+                <%if(user.isPromoted == true){%>
+                    <tr class = "selected">
+                        <td><b><%= user.name%></b></td>
+                        <td><b><%= user.email%></b></td>
+                        <td><form method="POST" action="/edit/<%= user._id%>/user?_method=PUT">
+                            
+                        </form></td>
+                        <td><form method="POST" action="/edit1/<%= user._id%>/user?_method=PUT">
+                        
+                        </form></td>
+                        <td><form method="POST" action="/delete/<%= user._id%>/user?_method=DELETE">
+                            <button>Delete</button>
+                        </form></td>
+                    </tr>  
+                <%}else if(user.isPromoted == false){%>
+                    <tr class = "notselected">
+                        <td><b><%= user.name%></b></td>
+                        <td><b><%= user.email%></b></td>
+                        <td><form method="POST" action="/edit/<%= user._id%>/user?_method=PUT">
+                        
+                        </form></td>
+                        <td><form method="POST" action="/edit1/<%= user._id%>/user?_method=PUT">
+                        
+                        </form></td>
+                        <td><form method="POST" action="/delete/<%= user._id%>/user?_method=DELETE">
+                            <button>Delete</button>
+                        </form></td>
+                    </tr>
+                <%}else{%>
+                    <tr>
+                        <td><b><%= user.name%></b></td>
+                        <td><b><%= user.email%></b></td>
+                        <td><form method="POST" action="/edit/<%= user._id%>/user?_method=PUT">
+                            <button>Select</button>
+                        </form></td>
+                        <td><form method="POST" action="/edit1/<%= user._id%>/user?_method=PUT">
+                            <button>Reject</button>
+                        </form></td>
+                        <td><form method="POST" action="/delete/<%= user._id%>/user?_method=DELETE">
+                            <button>Delete</button>
+                        </form></td>
+                    </tr>
+                <%}%>
+            <%})%>
+        </table>
+    </div>
+    <div><a href="/form"><button>Add User</button></a></div>
+</body>
+</html>
